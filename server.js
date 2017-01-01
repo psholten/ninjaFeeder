@@ -1,20 +1,38 @@
 var express = require("express");
 var bodyParser = require("body-parser");
 var CronJob = require("cron").CronJob;
-var app = express();
+var Gpio = require("onoff").Gpio,
+	relay = new Gpio(4, 'out');
 
+var app = express();
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
+var autoMode = false;
 var job = new CronJob('* * * * * *', function () {
     console.log('On Tick');
 });
+
+function feedKitty() {
+   console.log('Feeding Kitty..');
+   relay.writeSync(1);
+   setTimeout(function () {
+	relay.writeSync(0);
+	console.log('Done!');
+	feeding = false;
+   }, 3000);
+}
 
 app.get('/', function (req, res) {
     res.sendfile("index.html");
 });
 
+app.get('/status', function(req, res) {
+    res.send({ status: autoMode });
+});
+
 app.post('/feedNinja', function (req, res) {
+    feedKitty();
     console.log("Kitty Feed");
     res.end("Ninja was feed at: " + new Date().toLocaleString());
 });
@@ -22,17 +40,24 @@ app.post('/feedNinja', function (req, res) {
 app.post('/auto', function (req, res) {
     var val = req.body.val;
     if (val === 'ON') {
+	autoMode = true;
         job.start();
         res.end("Auto Feeder Started - " + new Date().toLocaleString());
         console.log(' ------job started ------');
     }
     else {
+	autoMode = false;
         job.stop();
         res.end("Auto Feeder Stopped - " + new Date().toLocaleString());
         console.log(' ------job Stopped ------');
     }
 })
 
-app.listen(3030, function () {
-    console.log("Started on PORT 3030");
+app.listen(3000, function () {
+    console.log("Started on PORT 3000");
 })
+
+function exit() {
+  relay.unexport();
+  process.exit();
+}

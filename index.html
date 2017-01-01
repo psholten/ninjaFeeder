@@ -10,9 +10,10 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
     crossorigin="anonymous"></script>
   <script>
+    var self = this;
     var logText = "";
     function toggleAutoFeeder(val) {
-      $.post("http://localhost:3030/auto", { val: val }, function (data) {
+      $.post("auto", { val: val }, function (data) {
         logText = logText += "<br/>" + data;
         $('#txtLog').html(logText);
       });
@@ -24,8 +25,13 @@
     }
 
     $(document).ready(function () {
+      $.get("status", function(res) {
+	console.log('auto mode = ' + res.status);
+	//res.status == true ? $('#btnAutoOn').click() : $('#btnAutoOff').click();
+      });
+
       $("#submit").click(function () {
-        $.post("http://localhost:3030/feedNinja", function (data) {
+        $.post("feedNinja", function (data) {
           logText = logText += "<br/>" + data;
           $('#txtLog').html(logText);
         });
@@ -56,7 +62,7 @@
 </head>
 
 <body>
-  <div class="jumbotron" style=" text-align: center; width: 40%; margin-left: 30%; margin-right: 30%; border-radius: 8px;">
+  <div class="jumbotron" style="margin-right: 30%; margin-left: 30%; text-align: center; border-radius: 8px;">
 <h1>Ninja Feeder</h1>
 <br/>
 <input class="btn btn-primary" type="button" id="submit" value="Feed The Ninja">
@@ -64,8 +70,8 @@
 <br/>
 <h4>Auto Feeding</h4>
 <div class="btn-group btn-toggle">
-  <button class="btn btn-default" value="ON">ON</button>
-  <button class="btn btn-primary active" value="OFF">OFF</button>
+  <button id="btnAutoOn" class="btn btn-default" value="ON">ON</button>
+  <button id="btnAutoOff" class="btn btn-primary active" value="OFF">OFF</button>
 </div>
 <br/>
 <h4>Log</h4>
@@ -75,3 +81,4 @@
 </body>
 
 </html>
+
