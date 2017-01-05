@@ -16,7 +16,7 @@ function feedKitty() {
     }, 3000);
 }
 var autoMode = false;
-var job = new CronJob('* 7,19 * * * *', function () {
+var job = new CronJob('00 7,19 * * * *', function () {
     feedKitty();
     console.log("Ninja was feed at: " + new Date().toLocaleString());
 });
@@ -55,7 +55,7 @@ app.post('/auto', function (req, res) {
 })
 
 app.listen(3000, function () {
-    console.log("Started on PORT 3000");
+    console.log("Started on PORT 3000 at: " + new Date().toLocaleString());
 })
 
 function exit() {
