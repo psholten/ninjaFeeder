@@ -25,9 +25,9 @@
     }
 
     $(document).ready(function () {
-      $.get("status", function(res) {
-	console.log('auto mode = ' + res.status);
-	//res.status == true ? $('#btnAutoOn').click() : $('#btnAutoOff').click();
+      $.get("status", function (res) {
+        console.log('auto mode = ' + res.status);
+        //res.status == true ? $('#btnAutoOn').click() : $('#btnAutoOff').click();
       });
 
       $("#submit").click(function () {
@@ -81,4 +81,3 @@
 </body>
 
 </html>
-

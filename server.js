@@ -1,23 +1,24 @@
 var express = require("express");
 var bodyParser = require("body-parser");
 var CronJob = require("cron").CronJob;
-var Gpio = require("onoff").Gpio,
-    relay = new Gpio(4, 'out');
+//var Gpio = require("onoff").Gpio,
+    //relay = new Gpio(4, 'out');
 
 var app = express();
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+app.use(express.static('public'));
 
-function feedKitty() {
-    console.log('Feeding Kitty..');
-    relay.writeSync(1);
-    setTimeout(function () {
-        relay.writeSync(0);
-    }, 5000);
-}
+// function feedKitty() {
+//     console.log('Feeding Kitty..');
+//     relay.writeSync(1);
+//     setTimeout(function () {
+//         relay.writeSync(0);
+//     }, 5000);
+// }
 var autoMode = false;
 var job = new CronJob('00 00 7,19 * * *', function () {
-    feedKitty();
+    //feedKitty();
     console.log("Ninja was feed at: " + new Date().toLocaleString());
 });
 
@@ -33,7 +34,7 @@ app.get('/status', function (req, res) {
 });
 
 app.post('/feedNinja', function (req, res) {
-    feedKitty();
+    //feedKitty();
     console.log("Kitty Feed");
     res.end("Ninja was feed at: " + new Date().toLocaleString());
 });
