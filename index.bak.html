@@ -1,0 +1,84 @@
+<html>
+
+<head>
+  <title>Ninja Feeder</title>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+    crossorigin="anonymous">
+  <!-- Latest compiled and minified JavaScript -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+    crossorigin="anonymous"></script>
+  <script>
+    var self = this;
+    var logText = "";
+    function toggleAutoFeeder(val) {
+      $.post("auto", { val: val }, function (data) {
+        logText = logText += "<br/>" + data;
+        $('#txtLog').html(logText);
+      });
+    }
+
+    function clearLog() {
+      logText = "";
+      $('#txtLog').html(logText);
+    }
+
+    $(document).ready(function () {
+      $.get("status", function(res) {
+	console.log('auto mode = ' + res.status);
+	//res.status == true ? $('#btnAutoOn').click() : $('#btnAutoOff').click();
+      });
+
+      $("#submit").click(function () {
+        $.post("feedNinja", function (data) {
+          logText = logText += "<br/>" + data;
+          $('#txtLog').html(logText);
+        });
+      });
+
+
+      $('.btn-toggle').click(function (e) {
+        $(this).find('.btn').toggleClass('active');
+        if ($(this).find('.btn-primary').size() > 0) {
+          $(this).find('.btn').toggleClass('btn-primary');
+        }
+        $(this).find('.btn').toggleClass('btn-default');
+
+        toggleAutoFeeder($(e.target).val());
+      });
+    });
+  </script>
+<style>
+      #txtLog {
+        background-color: white;
+        height: 200px;
+        width: 100%;
+        font-size: smaller;
+        font-family: monospace;
+        overflow-y: scroll;
+      }
+  </style>
+</head>
+
+<body>
+  <div class="jumbotron" style="margin-right: 30%; margin-left: 30%; text-align: center; border-radius: 8px;">
+<h1>Ninja Feeder</h1>
+<br/>
+<input class="btn btn-primary" type="button" id="submit" value="Feed The Ninja">
+<br/>
+<br/>
+<h4>Auto Feeding</h4>
+<div class="btn-group btn-toggle">
+  <button id="btnAutoOn" class="btn btn-default" value="ON">ON</button>
+  <button id="btnAutoOff" class="btn btn-primary active" value="OFF">OFF</button>
+</div>
+<br/>
+<h4>Log</h4>
+<p id="txtLog"></p>
+<button class="btn btn-default" onclick="clearLog()">Clear Log</button>
+</div>
+</body>
+
+</html>
+

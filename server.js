@@ -21,7 +21,7 @@ var job = new CronJob('00 7,19 * * * *', function () {
     console.log("Ninja was feed at: " + new Date().toLocaleString());
 });
 
-//TODO use couch DB to have persisted sstatus?
+//TODO use storage of some kind to have persisted status?
 
 //TODO extract out server code?
 app.get('/', function (req, res) {

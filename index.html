@@ -1,84 +1,52 @@
+<!DOCTYPE HTML>
+<!--
+	Fractal by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
 <html>
+	<head>
+		<title>Ninja Feeder</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<!--[if lte IE 8]><link rel="stylesheet" href="assets/css/ie8.css" /><![endif]-->
+		<!--[if lte IE 9]><link rel="stylesheet" href="assets/css/ie9.css" /><![endif]-->
+	</head>
+	<body id="top">
 
-<head>
-  <title>Ninja Feeder</title>
-  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-  <!-- Latest compiled and minified CSS -->
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
-    crossorigin="anonymous">
-  <!-- Latest compiled and minified JavaScript -->
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
-    crossorigin="anonymous"></script>
-  <script>
-    var self = this;
-    var logText = "";
-    function toggleAutoFeeder(val) {
-      $.post("auto", { val: val }, function (data) {
-        logText = logText += "<br/>" + data;
-        $('#txtLog').html(logText);
-      });
-    }
+		<!-- Header -->
+			<header id="header">
+				<div class="content">
+					<h1><a href="#">Ninja Feeder</a></h1>
+					<p>Press button -> feed cat<br />
+					It's not rocket science</p>
+					<ul class="actions">
+						<li><a href="#" class="button special icon fa-download">Feed Ninja</a></li>
+						<li><a href="#one" class="button icon fa-refresh scrolly">Auto Feed</a></li>
+					</ul>
+				</div>
+				<div class="image phone"><div class="inner"><img src="images/screen.jpg" alt="" /></div></div>
+			</header>
 
-    function clearLog() {
-      logText = "";
-      $('#txtLog').html(logText);
-    }
+		<!-- Footer -->
+			<!--<footer id="footer">
+				<ul class="icons">
+					<li><a href="#" class="icon fa-facebook"><span class="label">Facebook</span></a></li>
+					<li><a href="#" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
+					<li><a href="#" class="icon fa-instagram"><span class="label">Instagram</span></a></li>
+				</ul>
+				<p class="copyright">&copy; Untitled. Credits: <a href="http://html5up.net">HTML5 UP</a></p>
+			</footer>-->
 
-    $(document).ready(function () {
-      $.get("status", function(res) {
-	console.log('auto mode = ' + res.status);
-	//res.status == true ? $('#btnAutoOn').click() : $('#btnAutoOff').click();
-      });
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/jquery.scrolly.min.js"></script>
+			<script src="assets/js/skel.min.js"></script>
+			<!--<script src="assets/js/util.js"></script>-->
+			<!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
+			<script src="assets/js/main.js"></script>
 
-      $("#submit").click(function () {
-        $.post("feedNinja", function (data) {
-          logText = logText += "<br/>" + data;
-          $('#txtLog').html(logText);
-        });
-      });
-
-
-      $('.btn-toggle').click(function (e) {
-        $(this).find('.btn').toggleClass('active');
-        if ($(this).find('.btn-primary').size() > 0) {
-          $(this).find('.btn').toggleClass('btn-primary');
-        }
-        $(this).find('.btn').toggleClass('btn-default');
-
-        toggleAutoFeeder($(e.target).val());
-      });
-    });
-  </script>
-<style>
-      #txtLog {
-        background-color: white;
-        height: 200px;
-        width: 100%;
-        font-size: smaller;
-        font-family: monospace;
-        overflow-y: scroll;
-      }
-  </style>
-</head>
-
-<body>
-  <div class="jumbotron" style="margin-right: 30%; margin-left: 30%; text-align: center; border-radius: 8px;">
-<h1>Ninja Feeder</h1>
-<br/>
-<input class="btn btn-primary" type="button" id="submit" value="Feed The Ninja">
-<br/>
-<br/>
-<h4>Auto Feeding</h4>
-<div class="btn-group btn-toggle">
-  <button id="btnAutoOn" class="btn btn-default" value="ON">ON</button>
-  <button id="btnAutoOff" class="btn btn-primary active" value="OFF">OFF</button>
-</div>
-<br/>
-<h4>Log</h4>
-<p id="txtLog"></p>
-<button class="btn btn-default" onclick="clearLog()">Clear Log</button>
-</div>
-</body>
-
+	</body>
 </html>
-
