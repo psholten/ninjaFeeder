@@ -1,30 +1,27 @@
 var express = require("express");
 var bodyParser = require("body-parser");
 var CronJob = require("cron").CronJob;
-//var Gpio = require("onoff").Gpio,
-    //relay = new Gpio(4, 'out');
+var Gpio = require("onoff").Gpio,
+  relay = new Gpio(4, 'out');
 
 var app = express();
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(express.static('public'));
 
-// function feedKitty() {
-//     console.log('Feeding Kitty..');
-//     relay.writeSync(1);
-//     setTimeout(function () {
-//         relay.writeSync(0);
-//     }, 5000);
-// }
+function feedKitty() {
+    console.log('Feeding Kitty..');
+    relay.writeSync(1);
+    setTimeout(function () {
+        relay.writeSync(0);
+    }, 5000);
+}
 var autoMode = false;
 var job = new CronJob('00 00 7,19 * * *', function () {
     //feedKitty();
     console.log("Ninja was feed at: " + new Date().toLocaleString());
 });
 
-//TODO use storage of some kind to have persisted status?
-
-//TODO extract out server code?
 app.get('/', function (req, res) {
     res.sendfile("index.html");
 });
