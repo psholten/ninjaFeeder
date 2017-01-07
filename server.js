@@ -39,9 +39,9 @@ app.post('/feedNinja', function (req, res) {
     res.end("Ninja was feed at: " + new Date().toLocaleString());
 });
 
-app.post('/auto', function (req, res) {
-    var val = req.body.val;
-    if (val === 'ON') {
+app.post('/autoFeed', function (req, res) {
+    autoMode = !autoMode;
+    if (autoMode) {
         autoMode = true;
         job.start();
         res.end("Auto Feeder Started - " + new Date().toLocaleString());

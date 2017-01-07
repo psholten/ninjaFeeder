@@ -13,9 +13,9 @@
     var self = this;
     var logText = "";
     function toggleAutoFeeder(val) {
-      $.post("auto", { val: val }, function (data) {
-        logText = logText += "<br/>" + data;
-        $('#txtLog').html(logText);
+      $.post("autoFeed", function (data) {
+        debugger;
+        //$('#txtLog').html(logText);
       });
     }
 
