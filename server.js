@@ -4,6 +4,8 @@ var CronJob = require("cron").CronJob;
 var Gpio = require("onoff").Gpio,
   relay = new Gpio(4, 'out');
 
+const sendEmail = require('./email');
+
 var app = express();
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
@@ -20,6 +22,7 @@ function feedKitty() {
 var autoMode = false;
 var job = new CronJob('00 00 7,19 * * *', function () {
     feedKitty();
+    sendEmail();
     console.log("Ninja was feed at: " + new Date().toLocaleString());
 });
 
