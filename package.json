@@ -1,0 +1,18 @@
+{
+  "name": "ninjafeeder",
+  "version": "1.1",
+  "description": "automated cat feeder using nodejs and raspberry pi",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "pete sholten",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.17.2",
+    "cron": "^1.2.1",
+    "express": "^4.15.3",
+    "nodemailer": "^4.0.1",
+    "onoff": "^1.1.2"
+  }
+}
