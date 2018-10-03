@@ -1,18 +1,27 @@
 {
-  "name": "ninjafeeder",
-  "version": "1.1",
-  "description": "automated cat feeder using nodejs and raspberry pi",
+  "name": "ninjaFeeder",
+  "version": "1.0.0",
+  "description": "feedz da catz",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
   },
-  "author": "pete sholten",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/psholten/ninjaFeeder.git"
+  },
+  "author": "",
   "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/psholten/ninjaFeeder/issues"
+  },
+  "homepage": "https://github.com/psholten/ninjaFeeder#readme",
   "dependencies": {
-    "body-parser": "^1.17.2",
-    "cron": "^1.2.1",
-    "express": "^4.15.3",
-    "nodemailer": "^4.0.1",
-    "onoff": "^1.1.2"
+    "body-parser": "^1.18.3",
+    "cron": "^1.4.1",
+    "express": "^4.16.3",
+    "nodemailer": "^4.6.8",
+    "onoff": "^3.2.1"
   }
 }

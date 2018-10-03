@@ -2,7 +2,7 @@ var express = require("express");
 var bodyParser = require("body-parser");
 var CronJob = require("cron").CronJob;
 var Gpio = require("onoff").Gpio,
-    relay = new Gpio(4, 'out');
+    relay = new Gpio(3, 'out');
 
 const sendEmail = require('./email');
 
