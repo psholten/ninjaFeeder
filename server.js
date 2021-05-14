@@ -16,7 +16,7 @@ function feedKitty() {
     relay.writeSync(1);
     setTimeout(function () {
         relay.writeSync(0);
-    }, 4000);
+    }, 5000);
 }
 
 var autoMode = false;
